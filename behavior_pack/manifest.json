@@ -1,0 +1,26 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "pack.description",
+    "name": "pack.name",
+    "uuid": "ca6e5349-b333-4486-8bf6-4e52339e4158",
+    "version": [0, 0, 1],
+    "min_engine_version": [1, 21, 0]
+  },
+  "modules": [
+    {
+      "description": "pack.description",
+      "language": "javascript",
+      "type": "script",
+      "uuid": "ef2478be-5fd9-4ec2-a637-75fc009be541",
+      "version": [0, 0, 1],
+      "entry": "scripts/main.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.2.0"
+    }
+  ]
+}
