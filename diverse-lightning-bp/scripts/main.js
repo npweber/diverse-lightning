@@ -1,3 +1,3 @@
-import "@/diverse-lightning-bp/scripts/lightning_strikes.js"
+import "./lightning_strikes.js"
 
 console.log("Diverse Lightning addon loaded!");
