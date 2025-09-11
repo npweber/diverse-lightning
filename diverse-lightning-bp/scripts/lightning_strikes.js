@@ -8,10 +8,12 @@ const CHUNKS_ASSUMED_LOADED = Math.pow(12 * 2, 2);
 let isThunderstorm = false;
 
 system.runInterval(() => {
-    if (isThunderstorm)
+    if (isThunderstorm) {
+        console.log("Thunderstorm detected");
         shouldStrikeLightningInChunks().forEach((chunkIndex) => {
             console.log(`Lightning strike in chunk ${chunkIndex}`);
         });
+    }
 }, 1);
 
 world.afterEvents.weatherChange.subscribe((event) => {
