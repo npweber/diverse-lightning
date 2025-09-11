@@ -1,5 +1,5 @@
 import { world, system } from "@minecraft/server"
-import { weightedRandom } from "@/scripts/utils/random.js"
+import { weightedRandom } from "@/diverse-lightning-bp/scripts/utils/random.js"
 
 // Assumed number of chunks loaded in the world,
 // based on the default render distance in the settings
