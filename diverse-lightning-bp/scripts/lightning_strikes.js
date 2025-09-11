@@ -1,16 +1,34 @@
 import { world, system, WeatherType } from "@minecraft/server"
 import { weightedRandom } from "./utils/random.js"
 
-// Assumed number of chunks loaded in the world,
-// based on the default render distance in the settings
 const CHUNKS_ASSUMED_LOADED = Math.pow(12 * 2, 2);
+const LIGHTNING_VARIANTS = [
+        {
+            name: "red_lightning",
+            chance: 20
+        },
+        {
+            name: "blue_lightning",
+            chance: 30
+        },
+        {
+            name: "white_lightning",
+            chance: 30
+        },
+        {
+            name: "purple_lightning",
+            chance: 20
+        }
+]
 
 let isThunderstorm = false;
 
 system.runInterval(() => {
     if (isThunderstorm) {
         shouldStrikeLightningInChunks().forEach((chunkIndex) => {
-            console.log(`Lightning strike in chunk ${chunkIndex}`);
+            const lightningVariantChoice = weightedRandom(LIGHTNING_VARIANTS.map(variant => variant.chance));
+            const lightningVariant = LIGHTNING_VARIANTS[lightningVariantChoice].name;
+            console.log(`${lightningVariant} strike in chunk ${chunkIndex}`);
         });
     }
 }, 1);
