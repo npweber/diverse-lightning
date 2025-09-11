@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server"
+import { world, system, WeatherType } from "@minecraft/server"
 import { weightedRandom } from "./utils/random.js"
 
 // Assumed number of chunks loaded in the world,
@@ -9,7 +9,6 @@ let isThunderstorm = false;
 
 system.runInterval(() => {
     if (isThunderstorm) {
-        console.log("Thunderstorm detected");
         shouldStrikeLightningInChunks().forEach((chunkIndex) => {
             console.log(`Lightning strike in chunk ${chunkIndex}`);
         });
@@ -17,7 +16,7 @@ system.runInterval(() => {
 }, 1);
 
 world.afterEvents.weatherChange.subscribe((event) => {
-    if (event.weather === "thunder") 
+    if (event.newWeather === WeatherType.Thunder) 
         isThunderstorm = true;
     else
         isThunderstorm = false;
