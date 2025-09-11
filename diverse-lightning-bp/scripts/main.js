@@ -1,2 +1,3 @@
-// Main script entry point for Diverse Lightning addon
+import "@/scripts/lightning_strikes.js"
+
 console.log("Diverse Lightning addon loaded!");
