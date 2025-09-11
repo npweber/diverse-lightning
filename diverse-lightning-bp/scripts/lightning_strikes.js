@@ -1,7 +1,8 @@
 import { world, system, WeatherType } from "@minecraft/server"
 import { weightedRandom } from "./utils/random.js"
 
-const CHUNKS_ASSUMED_LOADED = Math.pow(12 * 2, 2);
+const DEFAULT_SIMULATION_DISTANCE = 4;
+const CHUNKS_ASSUMED_LOADED = Math.pow(DEFAULT_SIMULATION_DISTANCE * 2, 2);
 const LIGHTNING_VARIANTS = [
         {
             name: "red_lightning",
