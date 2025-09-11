@@ -33,6 +33,9 @@ system.runInterval(() => {
         });
     }
 }, 1);
+system.runInterval(() => {
+    console.log(weightedRandom(LIGHTNING_VARIANTS.map(variant => variant.chance)));
+}, 80);
 
 world.afterEvents.weatherChange.subscribe((event) => {
     if (event.newWeather === WeatherType.Thunder) 
