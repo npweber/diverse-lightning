@@ -1,7 +1,7 @@
-import { ClientSystemInfo } from "@minecraft/server"
+import { world } from "@minecraft/server"
 
 export function determineSimulationDistance() {
-    const maxRenderDistance = ClientSystemInfo.maxRenderDistance;
-    console.log(maxRenderDistance);
+    const singlePlayerInWorld = world.getPlayers()[0]
+    console.log(singlePlayerInWorld.getClientSystemInfo().maxRenderDistance);
     return 4;
 }
