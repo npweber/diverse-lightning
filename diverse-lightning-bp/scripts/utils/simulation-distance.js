@@ -13,6 +13,8 @@ world.afterEvents.playerSpawn.subscribe((event) => {
             const testLocation = { x: testLocationX , y: testLocationY, z: playerLocation.z };
             playerDimension.spawnEntity("minecraft:pig", testLocation);
         } catch (error) {
+            console.log(error);
+            console.log(simulationDistance);
             continue;
         }
         console.log(simulationDistance);
