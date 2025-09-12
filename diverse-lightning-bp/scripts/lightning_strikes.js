@@ -1,9 +1,7 @@
 import { world, system, WeatherType } from "@minecraft/server"
 import { weightedRandom } from "./utils/random.js"
-import { determineSimulationDistance } from "./utils/utils.js"
+import "./utils/simulation-distance.js"
 
-const SIMULATION_BOUNDING_BOX_SIDE_LENGTH = determineSimulationDistance() * 2;
-const CHUNKS_SIMULATED = Math.pow(SIMULATION_BOUNDING_BOX_SIDE_LENGTH, 2);
 const LIGHTNING_VARIANTS = [
         {
             name: "red_lightning",
