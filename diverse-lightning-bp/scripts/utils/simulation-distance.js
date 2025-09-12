@@ -1,7 +1,7 @@
 import { world } from "@minecraft/server"
 
 world.afterEvents.playerSpawn.subscribe((event) => {
-    const maxRenderDistance = event.player.getClientSystemInfo().maxRenderDistance;
+    const maxRenderDistance = event.player.clientSystemInfo.maxRenderDistance;
     const playerDimension = event.player.getDimension();
     const playerLocation = event.player.location;
         
