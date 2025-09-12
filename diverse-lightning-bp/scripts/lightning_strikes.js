@@ -1,8 +1,9 @@
 import { world, system, WeatherType } from "@minecraft/server"
 import { weightedRandom } from "./utils/random.js"
+import { determineSimulationDistance } from "./utils/utils.js"
 
-const DEFAULT_SIMULATION_DISTANCE = 4;
-const CHUNKS_ASSUMED_LOADED = Math.pow(DEFAULT_SIMULATION_DISTANCE * 2, 2);
+const SIMULATION_BOUNDING_BOX_SIDE_LENGTH = determineSimulationDistance() * 2;
+const CHUNKS_SIMULATED = Math.pow(SIMULATION_BOUNDING_BOX_SIDE_LENGTH, 2);
 const LIGHTNING_VARIANTS = [
         {
             name: "red_lightning",
@@ -33,9 +34,6 @@ system.runInterval(() => {
         });
     }
 }, 1);
-system.runInterval(() => {
-    console.log(weightedRandom(LIGHTNING_VARIANTS.map(variant => variant.chance)));
-}, 80);
 
 world.afterEvents.weatherChange.subscribe((event) => {
     if (event.newWeather === WeatherType.Thunder) 
@@ -46,7 +44,7 @@ world.afterEvents.weatherChange.subscribe((event) => {
 
 function shouldStrikeLightningInChunks() {
     const shouldStrikeLightningInChunks = [];
-    for (let i = 0; i < CHUNKS_ASSUMED_LOADED; i++)
+    for (let i = 0; i < CHUNKS_SIMULATED; i++)
         if (weightedRandom([99.999, 0.001]) === 1) 
             shouldStrikeLightningInChunks.push(i);
     return shouldStrikeLightningInChunks;
