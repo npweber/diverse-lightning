@@ -43,6 +43,7 @@ world.afterEvents.weatherChange.subscribe((event) => {
 });
 
 function shouldStrikeLightningInChunks(chunksSimulated) {
+    console.log(`Simulating ${chunksSimulated} chunks`);
     const shouldStrikeLightningInChunks = [];
     for (let i = 0; i < chunksSimulated; i++)
         if (weightedRandom([99.999, 0.001]) === 1) 
