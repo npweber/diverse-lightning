@@ -7,5 +7,5 @@ world.afterEvents.playerSpawn.subscribe((event) => {
         
     let testLocationSimulated = { x: playerLocation.x + (maxRenderDistance * 16), y: playerLocation.y, z: playerLocation.z };
 
-    console.log(testLocationSimulated);
+    console.log(testLocationSimulated.x);
 });
