@@ -9,7 +9,7 @@ world.afterEvents.playerSpawn.subscribe((event) => {
     for (const simulationDistance of POSSIBLE_SIMULATION_DISTANCES) {
         try {
             const testLocationX = playerLocation.x + (simulationDistance * 16);
-            const testLocationY = playerDimension.getTopmostBlock({x: testLocationX, z: playerLocation.z});
+            const testLocationY = playerDimension.getTopmostBlock({x: testLocationX, z: playerLocation.z}).y;
             const testLocation = { x: testLocationX , y: testLocationY, z: playerLocation.z };
             playerDimension.spawnEntity("minecraft:pig", testLocation);
         } catch (error) {
