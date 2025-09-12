@@ -1,11 +1,20 @@
 import { world } from "@minecraft/server"
 
+const POSSIBLE_SIMULATION_DISTANCES = [12,10,8,6,4];
+
 world.afterEvents.playerSpawn.subscribe((event) => {
-    const maxRenderDistance = event.player.clientSystemInfo.maxRenderDistance;
     const playerDimension = event.player.dimension;
     const playerLocation = event.player.location;
-        
-    let testLocationSimulated = { x: playerLocation.x + (maxRenderDistance * 16), y: playerLocation.y, z: playerLocation.z };
 
-    console.log(testLocationSimulated.x);
+    for (const simulationDistance of POSSIBLE_SIMULATION_DISTANCES) {
+        try {
+            const testLocationX = playerLocation.x + (simulationDistance * 16);
+            const testLocationY = playerDimension.getTopMostBlock({x: testLocationX, z: playerLocation.z});
+            const testLocation = { x: testLocationX , y: testLocationY, z: playerLocation.z };
+            playerDimension.spawnEntity("minecraft:pig", testLocation);
+        } catch (error) {
+            continue;
+        }
+        console.log(simulationDistance);
+    }
 });
