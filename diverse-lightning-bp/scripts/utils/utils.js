@@ -1,6 +1,7 @@
 import { clientSystemInfo } from "@minecraft/server"
 
 export function determineSimulationDistance() {
-    console.log(clientSystemInfo);
+    const maxRenderDistance = clientSystemInfo.maxRenderDistance;
+    console.log(maxRenderDistance);
     return 4;
 }
