@@ -47,6 +47,7 @@ function getWeatherState(playerDimension) {
     try {
         const result = playerDimension.runCommand("weather query");
         if (result.successCount > 0) {
+            console.log(result.statusMessage);
             // Parse the status message to determine weather
             const statusMessage = result.statusMessage || "";
             if (statusMessage.includes("clear")) {
@@ -68,7 +69,7 @@ world.afterEvents.playerSpawn.subscribe((event) => {
     if (playerDimension.id !== "minecraft:overworld") {
         return;
     }
-    
+
     console.log(getWeatherState(playerDimension));
 });
 
