@@ -43,9 +43,9 @@ world.afterEvents.weatherChange.subscribe((event) => {
 });
 
 // Function to get current weather state using command
-function getWeatherState(dimension) {
+function getWeatherState(playerDimension) {
     try {
-        const result = dimension.runCommand("weather query");
+        const result = playerDimension.runCommand("weather query");
         if (result.successCount > 0) {
             // Parse the status message to determine weather
             const statusMessage = result.statusMessage || "";
@@ -64,13 +64,12 @@ function getWeatherState(dimension) {
     }
 }
 world.afterEvents.playerSpawn.subscribe((event) => {
-    const playerDimension = event.player.dimension;
     if (playerDimension.id !== "minecraft:overworld") {
         return;
     }
-
-    const currentWeather = getWeatherState(playerDimension);
-    console.log("Current weather state:", currentWeather);
+    
+    const playerDimension = event.player.dimension;
+    console.log(getWeatherState(playerDimension));
 });
 
 function shouldStrikeLightningInChunks(chunksSimulated) {
