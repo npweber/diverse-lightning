@@ -27,6 +27,7 @@ world.afterEvents.playerSpawn.subscribe((event) => {
                 console.error(`Error spawning entity to test simulation distance "simulationDistance: ${simulationDistance}":\n ${error}`);
         }
     }
+    console.log(`Simulation distance: ${SIMULATION_DISTANCE}`);
 });
 
 export function getSimulationDistance() {
