@@ -42,13 +42,35 @@ world.afterEvents.weatherChange.subscribe((event) => {
         isThunderstorm = false;
 });
 
+// Function to get current weather state using command
+function getWeatherState(dimension) {
+    try {
+        const result = dimension.runCommand("weather query");
+        if (result.successCount > 0) {
+            // Parse the status message to determine weather
+            const statusMessage = result.statusMessage || "";
+            if (statusMessage.includes("clear")) {
+                return "clear";
+            } else if (statusMessage.includes("rain")) {
+                return "rain";
+            } else if (statusMessage.includes("thunder")) {
+                return "thunder";
+            }
+        }
+        return "unknown";
+    } catch (error) {
+        console.error("Error getting weather state:", error);
+        return "error";
+    }
+}
 world.afterEvents.playerSpawn.subscribe((event) => {
     const playerDimension = event.player.dimension;
     if (playerDimension.id !== "minecraft:overworld") {
         return;
     }
 
-    console.log(playerDimension.runCommand("weather query"));
+    const currentWeather = getWeatherState(playerDimension);
+    console.log("Current weather state:", currentWeather);
 });
 
 function shouldStrikeLightningInChunks(chunksSimulated) {
