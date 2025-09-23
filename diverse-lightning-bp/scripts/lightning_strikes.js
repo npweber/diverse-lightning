@@ -64,11 +64,11 @@ function getWeatherState(playerDimension) {
     }
 }
 world.afterEvents.playerSpawn.subscribe((event) => {
+    const playerDimension = event.player.dimension;
     if (playerDimension.id !== "minecraft:overworld") {
         return;
     }
     
-    const playerDimension = event.player.dimension;
     console.log(getWeatherState(playerDimension));
 });
 
