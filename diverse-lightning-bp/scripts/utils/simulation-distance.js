@@ -5,7 +5,7 @@ let SIMULATION_DISTANCE;
 
 world.afterEvents.playerSpawn.subscribe((event) => {
     const playerDimension = event.player.dimension;
-    if (playerDimension.name !== "minecraft:overworld") {
+    if (playerDimension.id !== "minecraft:overworld") {
         return;
     }
     const playerLocation = event.player.location;
