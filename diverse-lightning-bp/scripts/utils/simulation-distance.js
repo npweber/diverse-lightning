@@ -25,6 +25,7 @@ world.afterEvents.playerSpawn.subscribe((event) => {
             SIMULATION_DISTANCE = simulationDistance;
             break;
         }
+        console.log(testSpawnEntityResult, simulationDistance);
     }
 });
 
