@@ -18,6 +18,7 @@ world.afterEvents.playerSpawn.subscribe((event) => {
             let testSpawnEntityResult = playerDimension.spawnEntity("minecraft:pig", testLocation);
             if (testSpawnEntityResult !== null) {
                 SIMULATION_DISTANCE = simulationDistance;
+                testSpawnEntityResult.remove();
                 break;
             }
         } catch (error) {

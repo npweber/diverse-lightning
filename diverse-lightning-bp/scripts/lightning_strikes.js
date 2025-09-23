@@ -42,6 +42,17 @@ world.afterEvents.weatherChange.subscribe((event) => {
         isThunderstorm = false;
 });
 
+world.afterEvents.playerSpawn.subscribe((event) => {
+    const playerDimension = event.player.dimension;
+    if (playerDimension.id !== "minecraft:overworld") {
+        return;
+    }
+
+    playerDimension.runCommand("weather query").then((result) => {
+        console.log(result);
+    });
+});
+
 function shouldStrikeLightningInChunks(chunksSimulated) {
     console.log(`Simulating ${chunksSimulated} chunks`);
     const shouldStrikeLightningInChunks = [];
