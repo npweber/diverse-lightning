@@ -48,9 +48,7 @@ world.afterEvents.playerSpawn.subscribe((event) => {
         return;
     }
 
-    playerDimension.runCommand("weather query").then((result) => {
-        console.log(result);
-    });
+    console.log(playerDimension.runCommand("weather query"));
 });
 
 function shouldStrikeLightningInChunks(chunksSimulated) {
