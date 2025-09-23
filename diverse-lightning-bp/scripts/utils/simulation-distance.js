@@ -5,8 +5,7 @@ let SIMULATION_DISTANCE;
 
 world.afterEvents.playerSpawn.subscribe((event) => {
     const playerDimension = event.player.dimension;
-    console.log(playerDimension.id);
-    if (playerDimension.id !== "overworld") {
+    if (playerDimension.id !== "minecraft:overworld") {
         return;
     }
     const playerLocation = event.player.location;
@@ -18,6 +17,7 @@ world.afterEvents.playerSpawn.subscribe((event) => {
             const testLocationY = playerDimension.getTopmostBlock({x: testLocationX, z: playerLocation.z}).y;
             const testLocation = { x: testLocationX , y: testLocationY, z: playerLocation.z };
             testSpawnEntityResult = playerDimension.spawnEntity("minecraft:pig", testLocation);
+            console.log(testSpawnEntityResult, simulationDistance);
         } catch (error) {
             testSpawnEntityResult = null;
             continue;
@@ -26,7 +26,6 @@ world.afterEvents.playerSpawn.subscribe((event) => {
             SIMULATION_DISTANCE = simulationDistance;
             break;
         }
-        console.log(testSpawnEntityResult, simulationDistance);
     }
 });
 
