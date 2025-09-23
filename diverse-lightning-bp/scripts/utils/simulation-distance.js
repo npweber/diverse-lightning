@@ -11,20 +11,20 @@ world.afterEvents.playerSpawn.subscribe((event) => {
     const playerLocation = event.player.location;
 
     for (const simulationDistance of POSSIBLE_SIMULATION_DISTANCES) {
-        let testSpawnEntityResult;
         try {
-            const testLocationX = playerLocation.x + (simulationDistance * 16);
-            const testLocationY = playerDimension.getTopmostBlock({x: testLocationX, z: playerLocation.z}).y;
+            const testLocationX = playerLocation.x + (simulationDistance * 16) - 2;
+            const testLocationY = playerDimension.getTopmostBlock({x: testLocationX, z: playerLocation.z}).y + 1;
             const testLocation = { x: testLocationX , y: testLocationY, z: playerLocation.z };
-            testSpawnEntityResult = playerDimension.spawnEntity("minecraft:pig", testLocation);
-            console.log(testSpawnEntityResult, simulationDistance);
+            let testSpawnEntityResult = playerDimension.spawnEntity("minecraft:pig", testLocation);
+            if (testSpawnEntityResult !== null) {
+                SIMULATION_DISTANCE = simulationDistance;
+                break;
+            }
         } catch (error) {
-            testSpawnEntityResult = null;
-            continue;
-        }
-        if (testSpawnEntityResult !== null) {
-            SIMULATION_DISTANCE = simulationDistance;
-            break;
+            if (error.name === "LocationInUnloadedChunkError") 
+                continue;
+            else
+                console.error(`Error spawning entity to test simulation distance "simulationDistance: ${simulationDistance}":\n ${error}`);
         }
     }
 });
