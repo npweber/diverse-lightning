@@ -1,6 +1,9 @@
 import { world, system, WeatherType } from "@minecraft/server"
 import { weightedRandom } from "./utils/random.js"
 import { getSimulationDistance } from "./utils/simulation-distance.js"
+import { disableVanillaLightning } from "./utils/disable-vanilla-lightning.js"
+
+disableVanillaLightning();
 
 const LIGHTNING_VARIANTS = [
     {
