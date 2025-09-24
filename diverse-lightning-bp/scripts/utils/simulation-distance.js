@@ -1,7 +1,7 @@
 const POSSIBLE_SIMULATION_DISTANCES = [12,10,8,6,4];
 
 export function getSimulationDistance(player) {
-    let simulationDistance = -1;
+    let simulationDistance;
     const playerDimension = player.dimension;
     if (playerDimension.id === "minecraft:overworld") {
         const playerLocation = player.location;
@@ -19,8 +19,9 @@ export function getSimulationDistance(player) {
             } catch (error) {
                 if (error.name === "LocationInUnloadedChunkError") 
                     continue;
-                else
-                    console.error(`Error spawning entity to test simulation distance "testSimulationDistance: ${testSimulationDistance}":\n ${error}`);
+                else {
+                    simulationDistance = error;
+                }
             }
         }
     }

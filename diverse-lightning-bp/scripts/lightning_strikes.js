@@ -32,7 +32,12 @@ world.afterEvents.weatherChange.subscribe((event) => {
 world.afterEvents.playerSpawn.subscribe((event) => {
     if (event.player.getDynamicProperty("isThunderstorm") === undefined)
         event.player.setDynamicProperty("isThunderstorm", 0);
+
     const simulationDistance = getSimulationDistance(event.player);
+    if (simulationDistance instanceof Error) {
+        console.error(`Error starting lightning cycle for player ${event.player.name}: Simulation distance was not determined: ${simulationDistance}`);
+        return;
+    }
 
     system.runInterval(() => {
         world.getDimension("minecraft:overworld").getPlayers().forEach((player) => {
