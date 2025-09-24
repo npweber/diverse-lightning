@@ -33,8 +33,7 @@ world.afterEvents.playerSpawn.subscribe((event) => {
 
     system.runInterval(() => {
         world.getDimension("minecraft:overworld").getPlayers().forEach((player) => {
-            const isThunderstorm = player.getDynamicProperty("isThunderstorm");
-            if (isThunderstorm) {
+            if (player.getDynamicProperty("isThunderstorm")) {
                 const SIMULATION_BOUNDING_BOX_SIDE_LENGTH = simulationDistance * 2;
                 const chunksSimulated = Math.pow(SIMULATION_BOUNDING_BOX_SIDE_LENGTH, 2);
                 shouldStrikeLightningInChunks(chunksSimulated).forEach((chunkIndex) => {

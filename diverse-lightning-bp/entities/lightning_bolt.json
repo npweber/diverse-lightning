@@ -1,0 +1,11 @@
+{
+  "format_version": "1.21.0.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "minecraft:lightning_bolt",
+      "is_spawnable": false,
+      "is_summonable": false,
+      "is_experimental": false
+    }
+  }
+}
