@@ -10,7 +10,7 @@ export function getSimulationDistance(player) {
                 const testLocationX = playerLocation.x + (testSimulationDistance * 16) - 2;
                 const testLocationY = playerDimension.getTopmostBlock({x: testLocationX, z: playerLocation.z}).y + 1;
                 const testLocation = { x: testLocationX , y: testLocationY, z: playerLocation.z };
-                let testSpawnEntityResult = playerDimension.spawnEntity("minecraft:pig", testLocation);
+                const testSpawnEntityResult = playerDimension.spawnEntity("minecraft:pig", testLocation);
                 if (testSpawnEntityResult !== null) {
                     simulationDistance = testSimulationDistance;
                     testSpawnEntityResult.remove();

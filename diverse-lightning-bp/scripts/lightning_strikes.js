@@ -21,35 +21,30 @@ const LIGHTNING_VARIANTS = [
     }
 ]
 
-let weatherObjective = world.scoreboard.getObjective("weather");
-if (!weatherObjective)
-    weatherObjective = world.scoreboard.addObjective("weather");
-    
-system.runInterval(() => {
-    world.scoreboard.getParticipants().forEach((participant) => {
-        const isThunderstorm = weatherObjective.getScore(participant);
-        if (isThunderstorm) {
-            const SIMULATION_BOUNDING_BOX_SIDE_LENGTH = getSimulationDistance(participant) * 2;
-            const chunksSimulated = Math.pow(SIMULATION_BOUNDING_BOX_SIDE_LENGTH, 2);
-            shouldStrikeLightningInChunks(chunksSimulated).forEach((chunkIndex) => {
-                const lightningVariantChoice = weightedRandom(LIGHTNING_VARIANTS.map(variant => variant.chance));
-                const lightningVariant = LIGHTNING_VARIANTS[lightningVariantChoice].name;
-                console.log(`${lightningVariant} strike in chunk ${chunkIndex}`);
-            });
-        }
-    });
-}, 1);
-
 world.afterEvents.weatherChange.subscribe((event) => {
     const isThunderstorm = event.newWeather === WeatherType.Thunder ? 1 : 0;
-    world.scoreboard.getParticipants().forEach((participant) => weatherObjective.setScore(participant, isThunderstorm));
+    world.getDimension("minecraft:overworld").getPlayers().forEach((player) => player.setDynamicProperty("isThunderstorm", isThunderstorm));
 });
 
 world.afterEvents.playerSpawn.subscribe((event) => {
-    if (!weatherObjective.hasParticipant(event.player)) {
-        weatherObjective.addParticipant(event.player);
-        weatherObjective.setScore(event.player, 0);
-    }
+    if (event.player.getDynamicProperty("isThunderstorm") === undefined)
+        event.player.setDynamicProperty("isThunderstorm", 0);
+    const simulationDistance = getSimulationDistance(event.player);
+
+    system.runInterval(() => {
+        world.getDimension("minecraft:overworld").getPlayers().forEach((player) => {
+            const isThunderstorm = player.getDynamicProperty("isThunderstorm");
+            if (isThunderstorm) {
+                const SIMULATION_BOUNDING_BOX_SIDE_LENGTH = simulationDistance * 2;
+                const chunksSimulated = Math.pow(SIMULATION_BOUNDING_BOX_SIDE_LENGTH, 2);
+                shouldStrikeLightningInChunks(chunksSimulated).forEach((chunkIndex) => {
+                    const lightningVariantChoice = weightedRandom(LIGHTNING_VARIANTS.map(variant => variant.chance));
+                    const lightningVariant = LIGHTNING_VARIANTS[lightningVariantChoice].name;
+                    console.log(`${lightningVariant} strike in chunk ${chunkIndex}`);
+                });
+            }
+        });
+    }, 1);
 });
 
 function shouldStrikeLightningInChunks(chunksSimulated) {
