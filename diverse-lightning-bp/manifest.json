@@ -5,7 +5,7 @@
     "name": "pack.name",
     "uuid": "ca6e5349-b333-4486-8bf6-4e52339e4158",
     "version": [0, 0, 1],
-    "min_engine_version": [1, 21, 0]
+    "min_engine_version": [1, 21, 100]
   },
   "modules": [
     {
@@ -15,6 +15,13 @@
       "uuid": "ef2478be-5fd9-4ec2-a637-75fc009be541",
       "version": [0, 0, 1],
       "entry": "scripts/main.js"
+    },
+    {
+      "description": "pack.description",
+      "language": "javascript",
+      "type": "data",
+      "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "version": [0, 0, 1]
     }
   ],
   "dependencies": [
