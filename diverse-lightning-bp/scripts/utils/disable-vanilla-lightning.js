@@ -6,10 +6,4 @@ export function disableVanillaLightning() {
         if (event.entity.typeId === "minecraft:lightning_bolt")
             event.entity.remove();
     });
-
-    // Alternative: Use beforeEvents to prevent spawning
-    world.beforeEvents.entitySpawn.subscribe((event) => {
-        if (event.typeId === "minecraft:lightning_bolt") 
-            event.cancel = true;
-    });
 }
